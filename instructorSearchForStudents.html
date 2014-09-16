@@ -1,0 +1,78 @@
+<?php
+	ob_start();
+	session_start();
+	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == "N") {
+		header("Location: http://jeffersonccit.com/phpproject1/signin.html");
+		session_destroy();
+		exit();
+	}
+	session_set_cookie_params("60");
+	$_SESSION["logged_in"] = "Y";
+	$iD = $_SESSION["id"];
+	$loginPassWord = $_SESSION["password"];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+      <title>
+	  White Board Search
+	  </title>
+	   <link rel="stylesheet" type="text/css" href="FMSstyles.css" />
+	   <script type="text/JavaScript">
+
+function validate(form) {
+  var returnValue = true;
+
+  var firstname = form.txtFirstName.value;
+  var lastname = form.txtLastName.value;
+  
+
+  if(firstname == 0) {
+  returnValue = false;
+  alert("Invalid First Name.");
+  frmRegister.txtFirstName.focus();
+}
+if (lastname == 0) {
+  returnValue = false;
+  alert("Invalid Last Name.");
+  frmRegister.txtLastName.focus();
+}
+return returnValue;
+}
+</script>
+	</head>
+	
+	<body>
+	
+	<div id="textFields">
+		<img src="images/Top.png" />
+		
+		<div id="navTop">
+			<a href="instructorIndex.php"> Home </a>
+		</div>
+		<div id="navTop">
+			<a href="index.html"> Sign Out </a>
+		</div>
+		
+		<fieldset>
+				
+					Student Search:
+					<form name="frmRegister" method="post" action="InstructorViewStudent.php"  onsubmit="return validate(this);">
+					<p>
+					<label for="txtFirstName"> <span id="maroon">First Name: </span> </label>
+					<input type="firstname" name="txtFirstName" id="txtFirstName" size="12" />
+					
+					<label for="txtLastName"> <span id="maroon">Last Name: </span></label>
+					<input type="lastname" name="txtLastName" id="txtLastName" size="12" />
+					</p>
+					
+		</fieldset>
+		
+					<input  class="red" type="submit" value="Search">
+					</form>
+		</div>
+	</body>
+	
+</html>

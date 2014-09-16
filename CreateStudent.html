@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+      <title>
+	  Register as Student
+	  </title>
+	   <link rel="stylesheet" type="text/css" href="FMSstyles.css" />
+	   <script type="text/JavaScript">
+	   
+
+function validate(form) {
+  var returnValue = true;
+
+  var username = form.txtUserName.value;
+  var password1 = form.txtPassword.value;
+  var password2 = form.txtPassword2.value;
+  var firstname = form.txtFirstName.value;
+  var lastname = form.txtLastName.value;
+  var email = form.txtEmail.value;
+  
+		
+
+if(username == 0) {
+  returnValue = false;
+  alert("Please enter a User Name.");
+  frmRegister.txtUserName.focus();
+}
+
+if (password1.length < 6) {
+  returnValue = false;
+  alert("Your password must be at least\n6 characters long.\nPlease try again.");
+  frmRegister.txtPassword.value = "";
+  frmRegister.txtPassword2.value = "";
+  frmRegister.txtPassword.focus();
+}
+if (password1 != password2) {
+  returnValue = false;
+  alert("Your password entries did not match.\nPlease try again.");
+  frmRegister.txtPassword.value = "";
+  frmRegister.txtPassword2.value = "";
+  frmRegister.txtPassword.focus();
+}
+if(firstname == 0) {
+  returnValue = false;
+  alert("Please enter your First Name.");
+  frmRegister.txtFirstName.focus();
+}
+if(lastname == 0) {
+  returnValue = false;
+  alert("Please enter your Last Name.");
+  frmRegister.txtLastName.focus();
+}
+if(email == 0) {
+  returnValue = false;
+  alert("Please enter a valid email.");
+  frmRegister.txtEmail.focus();
+}
+else{
+	alert("You have successfully Registered!");
+}
+  return returnValue;
+  
+  
+  value.split(/\d/).length-1===10;
+}
+
+</script>
+	</head>
+	
+	<body>
+		<div id="textFields">
+		<img src="images/Top.png" />
+		
+		<div id="navTop">
+			<a href="index.html"> Back </a>
+		</div>
+			<fieldset>
+			<div id="note-red">
+                    <p><span id = "red">*</span> denotes optional field</p></div>
+					Please fill in the following:
+					<form name="frmRegister" method="post" action="studentCreate.php"  onsubmit="return validate(this);">
+					<p>
+					<label for="txtUsername"> <span id="maroon">User Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+					<input type="text" name="txtUserName" id="txtUserName" size="12" />
+					</p>
+					<p>
+					<div id="note">Note: Must begin with a capital S <br /> </div>
+					<label for="txtPassword"> <span id="maroon">Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+					<input type="password" name="txtPassword" id="txtPassword" size="12" />
+					</p>
+					<p>
+					<label for="txtPassword2"> <span id="maroon">Retype Password:&nbsp </span> </label>
+					<input type="password" name="txtPassword2" id="txtPassword2" size="12" />
+					</p>
+					<hr />
+					<p>
+					<label for="txtFirstName"> <span id="maroon">First Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+					<input type="firstName" name="txtFirstName" id="txtFirstName" size="12" />
+					
+					<label for="txtLastName"> <span id="maroon">Last Name: </span></label>
+					<input type="lastName" name="txtLastName" id="txtLastName" size="12" />
+					</p>
+					<hr />
+					<p>
+					<label for="txtEmail"> <span id="maroon">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span></label>
+					<input type="email" name="txtEmail" id="txtEmail" size="12" />
+					</p>
+					<center><p><span id="note-red">
+					<span id = "red">*</span>Home and Cell phone format does not have symbols e.g 5558761234!! Not like 555-876-1234 or not like (555)876-1234!!<span id = "red">*</span>
+					</span></p></center>
+					<p>
+					<label> <span id="maroon">Home Phone:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span><input type="text" name="hPhone" /> </label><span id="red">*&nbsp </span>
+					<label> <span id="maroon">Cell Phone: </span><input type="text" name="cPhone" /> </label><span id="red">*&nbsp </span>
+					</p>
+					<p>
+					<label> <span id="maroon">
+					Cell Phone Carrier: </span> <select type="dropCarrier"
+					name="Carrier" id="Carrier">
+						<option value="none"></option>
+						<option value="@txt.att.net"> AT&T </option>
+						<option value="@vtext.com"> Verizon </option>
+						<option value="@messaging.sprintpcs.com"> Sprint </option>
+						<option value="@tmomail.net"> T-Mobile </option>
+					</select> </label>
+					</p>
+					<label> <span id="maroon">Contact Preference: </span><select name="contactPreference">
+						<option value="email"> Email </option>
+						<option value="txt"> Text </option>
+					
+					</select> </label>
+					<hr />
+					<input  class="red" type="submit" value="Apply">
+				</form>
+					</div>
+			</fieldset>
+
+		</div>
+		
+	</body>
+	
+</html>
