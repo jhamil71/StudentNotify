@@ -81,6 +81,14 @@ ob_start();
 				</tr>
 
 <?php
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";
+	$password = "Teacher1!";
+
+	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
+	mysql_select_db($dbname);		
+
 	$query='SELECT CourseID FROM `Course-Student` WHERE StudentID = \''.$dBStudentID.'\';';
 	$result=mysql_query($query);
 

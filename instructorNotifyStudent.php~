@@ -6,7 +6,13 @@
 	$iD = $_SESSION['txtUserName'];
 	$txtMessage = $_POST['txtMessage'];
 
-	require("db_connect.php");
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";	
+	$password = "Teacher1!";
+	$conn = mysql_connect($hostname, $username, $password) OR DIE
+	("Unable to connect to database! Please try again later.");	
+	mysql_select_db($dbname);
 
 	$query678='SELECT * FROM `Teacher` WHERE TeacherID = \''.$iD.'\';';
 	$result2=mysql_query($query678);

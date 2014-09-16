@@ -11,7 +11,6 @@ ob_start();
 	
 	$dBTeacherID = $_SESSION['SendToID'];
 	ob_end_flush( );
-	require("db_connect.php");
 ?>		
 	
 <!DOCTYPE html> 
@@ -35,6 +34,13 @@ ob_start();
 			<p><center><font size="5" face="verdana" color="green">Instructor's Information</font></center></p>
 		
 <?php
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";
+	$password = "Teacher1!";
+	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
+	mysql_select_db($dbname);
+	
 	//echo "<p>TEST:   ".$dBTeacherID."</p>\n";
 	
 	

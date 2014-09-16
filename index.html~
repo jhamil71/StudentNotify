@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>White Board Home</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
+<link rel="stylesheet" type="text/css" href="style.css" />
 <body>
 	<div id="textFields">
 	<img src="images/Top.png" />

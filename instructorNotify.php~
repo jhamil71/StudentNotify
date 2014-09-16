@@ -7,7 +7,6 @@
 	$iDs = $_POST['course_select'];
 	$_SESSION['course_select'] = $iDs;
 	ob_end_flush( );
-	require("db_connect.php");
 ?>
 <!DOCTYPE html> 
 <html>
@@ -39,6 +38,16 @@
 				<tr><th> Notify Student(s) </th></tr>
 						
 <?php
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";	
+	$password = "Teacher1!";
+	$conn = mysql_connect($hostname, $username, $password) OR DIE
+	("Unable to connect to database! Please try again later.");	
+	mysql_select_db($dbname);
+								
+	
+
 	$query = 'SELECT * FROM `Course-Student` WHERE CourseID = \''.$iDs.'\';';
 	$result=mysql_query($query);
 

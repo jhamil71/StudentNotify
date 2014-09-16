@@ -64,7 +64,7 @@
 		$message .= 'Whole query: ' . $query;
 		die($message);
 	}
-	if($result == $oldPassword){
+	if($result == $oldPassword){	
 		if($newPassword == $newPassword2 || $newPassword != $oldPassword){
 			$query='UPDATE `Student` SET Password=\''.$newPassword.'\' WHERE StudentID =\''.$iD.'\';';
 			$result=mysql_query($query);
@@ -75,7 +75,7 @@
 			}
 		}
 	}
-	else if($result != $oldPassword){
+		else if($result != $oldPassword){
 		?>
 		<script type="text/JavaScript">
 		alert("Your Password you typed in the Old Password field did not match what is on file. Please try again!");
@@ -83,6 +83,8 @@
 		<?php
 		}
 	*/	
+		
+	
 	
 	if($firstName != ""){
 		$query='UPDATE `Student` SET FirstName=\''.$firstName.'\' WHERE StudentID =\''.$iD.'\';';

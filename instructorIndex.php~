@@ -11,7 +11,7 @@
 	$iD = $_SESSION['txtUserName'];
 	$loginPassWord = $_SESSION["txtPassword"];
 	ob_end_flush( );
-	require("db_connect.php");
+	require("db_connect");
 ?>
 
 <!DOCTYPE html> 

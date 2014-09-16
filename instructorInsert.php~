@@ -10,7 +10,7 @@
 	$_SESSION['logged_in'] = 'Y';
 	$iD = $_SESSION['txtUserName'];
 	$loginPassWord = $_SESSION["txtPassword"];	
-	require("db_connect.php");
+	require("db_connect");
 	
 	$oldPassword=$_POST['oldPassword'];
 	$newPassword=$_POST['newPassword'];

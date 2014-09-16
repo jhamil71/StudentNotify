@@ -13,7 +13,6 @@
 	$iD = $_SESSION['txtUserName'];
 	$loginPassWord = $_SESSION["txtPassword"];
 	ob_end_flush( );
-	require("db_connect.php");
 ?>
 
 
@@ -41,7 +40,16 @@
 			<fieldset>		
 			<br />
 			<br />
-<?php			
+<?php
+
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";
+	$password = "Teacher1!";	
+
+	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
+	mysql_select_db($dbname);			
+
 	//echo "<p>".$iD."</p>\n";	
 
 	//select table from a databse

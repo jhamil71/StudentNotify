@@ -1,3 +1,16 @@
+<?php
+	ob_start();
+	session_start();
+	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == "N") {
+		header("Location: http://jeffersonccit.com/phpproject1/signin.html");
+		session_destroy();
+		exit();
+	}
+	session_set_cookie_params("60");
+	$_SESSION["logged_in"] = "Y";
+	$iD = $_SESSION["id"];
+	$loginPassWord = $_SESSION["password"];
+?>
 <!DOCTYPE html> 
 <html>
 <head>

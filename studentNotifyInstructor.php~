@@ -10,7 +10,6 @@
 	$iD2 = $_POST['course_select'];
 		
 	ob_end_flush( );
-	require("db_connect.php");
 ?>
 
 <!DOCTYPE html> 
@@ -40,6 +39,14 @@
 				</tr>
 
 <?php
+	$hostname = "teacherstudent.db.10405859.hostedresource.com";
+	$username = "teacherstudent";
+	$dbname = "teacherstudent";
+	$password = "Teacher1!";
+
+	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
+	mysql_select_db($dbname);
+	
 	//select TeacherID and CourseID from Database
 	$query='SELECT TeacherID FROM `Course` WHERE CourseID = \''.$iD2.'\';';
 	$result=mysql_query($query);							
