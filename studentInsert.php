@@ -14,22 +14,15 @@
 	$newPassword=$_POST['newPassword'];
 	$newPassword2=$_POST['newPassword2'];
 	$firstName=$_POST['firstName'];
-	$lastName=$_POST['lastName'];
 	$email=$_POST['txtEmail'];
-	$homeAddress=$_POST['homeAddress'];
-	$hPhone=$_POST['hPhone'];
 	$cPhone=$_POST['cPhone'];
 	$carrier=$_POST['carrier'];
 	$contactPreference=$_POST['contactPreference'];
-	$major=$_POST['major'];
-	$employmentStatus=$_POST['employment'];
-	$educationalGoals=$_POST['educationalGoals'];	
-	$hobbies=$_POST['hobbies'];
 	$addCourseNumber=$_POST['addCourse'];
 	$deleteCourseNumber=$_POST['deleteCourse'];	
 	
 	if($newPassword != ""){
-		$query='SELECT Password FROM `Student` WHERE StudentID=\''.$iD.'\';';
+		$query='SELECT Password FROM `User` WHERE UserID=\''.$iD.'\';';
 		$result=mysql_query($query);
 		
 		if(!$result){
@@ -45,7 +38,7 @@
 	
 		//the old password is right  AND newPW is the same as the retyped one
 		if($oldPassword == $dBPassword && $newPassword == $newPassword2){			
-			$query='UPDATE `Student` SET Password=\''.$newPassword.'\' WHERE StudentID =\''.$iD.'\';';
+			$query='UPDATE `User` SET Password=\''.$newPassword.'\' WHERE UserID =\''.$iD.'\';';
 			$result=mysql_query($query);
 			if (!$result) {
 				$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -85,7 +78,7 @@
 	*/	
 	
 	if($firstName != ""){
-		$query='UPDATE `Student` SET FirstName=\''.$firstName.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET FirstName=\''.$firstName.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -95,7 +88,7 @@
 	}
 	
 	if($lastName != ""){
-		$query='UPDATE `Student` SET LastName=\''.$lastName.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET LastName=\''.$lastName.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -105,7 +98,7 @@
 	}
 	
 	if($email != ""){
-		$query='UPDATE `Student` SET Email=\''.$email.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET Email=\''.$email.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -115,7 +108,7 @@
 	}
 	
 	if($homeAddress != ""){
-		$query='UPDATE `Student` SET Address=\''.$homeAddress.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET Address=\''.$homeAddress.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -125,7 +118,7 @@
 	}	
 	
 	if($hPhone != ""){
-		$query='UPDATE `Student` SET HomePhone=\''.$hPhone.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET HomePhone=\''.$hPhone.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -135,7 +128,7 @@
 	}
 	
 	if($cPhone != ""){
-		$query='UPDATE `Student` SET CellPhone=\''.$cPhone.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET CellPhone=\''.$cPhone.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);		
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -145,7 +138,7 @@
 	}
 	
 	if($carrier != ""){
-		$query='UPDATE `Student` SET Carrier=\''.$carrier.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET Carrier=\''.$carrier.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);		
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -155,47 +148,7 @@
 	}
 	
 	if($contactPreference != ""){
-		$query='UPDATE `Student` SET ContactPreference=\''.$contactPreference.'\' WHERE StudentID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-
-	if($major != ""){
-		$query='UPDATE `Student` SET Major=\''.$major.'\' WHERE StudentID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-
-	if($employmentStatus != ""){
-		$query='UPDATE `Student` SET EmploymentStatus=\''.$employmentStatus.'\' WHERE StudentID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-	
-	if($educationalGoals != ""){
-		$query='UPDATE `Student` SET EducationalGoals=\''.$educationalGoals.'\' WHERE StudentID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-	
-	if($hobbies != ""){
-		$query='UPDATE `Student` SET HobbiesInterests=\''.$hobbies.'\' WHERE StudentID =\''.$iD.'\';';
+		$query='UPDATE `User` SET ContactPreference=\''.$contactPreference.'\' WHERE UserID =\''.$iD.'\';';
 		$result=mysql_query($query);		
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -205,7 +158,7 @@
 	}
 	
 	if($addCourseNumber != ""){
-		$query="INSERT INTO `Course-Student` (CourseID, StudentID) VALUES ('$addCourseNumber', '$iD');";
+		$query="INSERT INTO `Course-Student` (CourseID, UserID) VALUES ('$addCourseNumber', '$iD');";
 		$result=mysql_query($query);
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -215,7 +168,7 @@
 	}
 	
 	if($deleteCourseNumber != ""){
-		$query="DELETE FROM `Course-Student` WHERE CourseID='$deleteCourseNumber' && StudentID='$iD';";
+		$query="DELETE FROM `Course-Student` WHERE CourseID='$deleteCourseNumber' && UserID='$iD';";
 		$result=mysql_query($query);		
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -224,7 +177,7 @@
 		}
 	}
 	  	  
-	header("Location: http://teacherstudent.jeffersonccit.com/StudentView_Edit.php");
+	header("Location: viewEdit.php");
 	
 	mysql_close($conn);
 	ob_end_flush( );

@@ -1,0 +1,6 @@
+db_connect.php
+mail_connect.php
+*~
+*.swp
+*.swo
+\#*

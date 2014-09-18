@@ -2,7 +2,7 @@
 	ob_start();
 	session_start();
 	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == "N") {
-		header("Location: http://teacherstudent.jeffersonccit.com/signin.html");
+		header("Location: signin.php");
 		session_destroy();
 		exit();
 	}
@@ -26,27 +26,19 @@
 		<br />
 	
 		<div id="navTop">
-			<a href="index.html"> Sign Out </a>
+			<a href="index.html">Sign Out</a>
 		</div>
+	<br>
+	<br>
 	<fieldset>
-		<h2 size="10"><center>White Board Instructor Home</center></h2><br />					
-		<p>			
-			Here you can Search for students and view their 
-			account information as well as edit your own account 
-			and send notifications via text and email. Just click 	
-			on one of the navigation buttons below to begin.
-		</p>
-	</fieldset>
-	<br /><br /><br />
-	<fieldset>
-		<form action="http://teacherstudent.jeffersonccit.com/instructorNotify.php" method ="post">
-		<table border='2' cellpadding='5'>	
+		<form action="instructorNotifyStudent.php" method ="post">
+		<table border='2' cellpadding='5'>
 			<tr>
 				<th> Course </th>
 			</tr>
 <?php				
 //select table from a databse
-$query="SELECT CourseID FROM `Course` WHERE TeacherID = '".$iD."';";
+$query="SELECT CourseID FROM `Course` WHERE UserID = '".$iD."';";
 $result=mysql_query($query);
 
 if (!$result) {
@@ -54,6 +46,7 @@ if (!$result) {
 	$message .= 'Whole query: ' . $query;
 	die($message);
 }
+
 else {
 	echo "<tr><td>\n<select name='course_select' size = '3'>\n";
 	while($row = mysql_fetch_array($result)) {
@@ -63,21 +56,18 @@ else {
 	echo "</select>\n</td>\n";
 }
 echo "<td><input type='submit' value='Notify Student(s)'></td></tr>"
-?>			
-							
+?>
 		</table>
 		</form>
-		<p>
-			Select one of the choices below:
-		</p>
+		<br>
+		<form action="demoSend.php" method ="post">
+			<input type='submit' value='Send me a demo message!'>
+		</form>
 	</fieldset>
 		<div id="nav-buttons-across">
-		<ul>	
-			<li> <a href="instructorSearchForStudents.html"> Search Students </a> </li>
-			<li> <a href="instructorView_Edit.php"> View/Edit Account </a> </li>
+		<ul>
+			<li> <a id="nav-buttons-across" href="viewEdit.php"> View/Edit Account </a> </li>
 		</ul>
-	
-		<br /><br />
 		</div>
 	</div>
 </body>

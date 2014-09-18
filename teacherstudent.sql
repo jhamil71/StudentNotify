@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.11.3
+-- version 3.4.11.1deb2+deb7u1
 -- http://www.phpmyadmin.net
 --
--- Host: 50.63.231.31
--- Generation Time: May 06, 2013 at 07:47 AM
--- Server version: 5.0.96
--- PHP Version: 5.1.6
+-- Host: localhost
+-- Generation Time: Sep 17, 2014 at 03:11 PM
+-- Server version: 5.5.38
+-- PHP Version: 5.4.4-14+deb7u14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,33 +26,24 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `Course`
 --
 
-CREATE TABLE `Course` (
+CREATE TABLE IF NOT EXISTS `Course` (
   `CourseID` varchar(11) NOT NULL,
   `TeacherID` varchar(15) NOT NULL,
-  PRIMARY KEY  (`CourseID`),
+  PRIMARY KEY (`CourseID`),
   KEY `TeacherID` (`TeacherID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `Course`
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `Course-Student`
 --
 
-CREATE TABLE `Course-Student` (
+CREATE TABLE IF NOT EXISTS `Course-Student` (
   `CourseID` varchar(11) NOT NULL,
   `StudentID` varchar(15) NOT NULL,
   KEY `CourseID` (`CourseID`),
   KEY `StudentID` (`StudentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `Course-Student`
---
 
 -- --------------------------------------------------------
 
@@ -59,27 +51,16 @@ CREATE TABLE `Course-Student` (
 -- Table structure for table `Student`
 --
 
-CREATE TABLE `Student` (
+CREATE TABLE IF NOT EXISTS `Student` (
   `StudentID` varchar(15) NOT NULL,
-  `Address` varchar(160) NOT NULL,
   `Password` varchar(30) NOT NULL,
-  `FirstName` varchar(40) NOT NULL,
-  `LastName` varchar(40) NOT NULL,
-  `HomePhone` varchar(10) NOT NULL,
+  `Name` varchar(40) NOT NULL,
   `CellPhone` varchar(10) NOT NULL,
   `Email` varchar(160) NOT NULL,
   `ContactPreference` enum('Email','Text') NOT NULL,
   `Carrier` enum('Verizon','AT&T','T-Mobile','Sprint') NOT NULL,
-  `Major` varchar(50) NOT NULL,
-  `EducationalGoals` varchar(50) NOT NULL,
-  `HobbiesInterests` varchar(1000) NOT NULL,
-  `EmploymentStatus` enum('Full-time','Part-time','Unemployed') NOT NULL,
-  PRIMARY KEY  (`StudentID`)
+  PRIMARY KEY (`StudentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `Student`
---
 
 
 -- --------------------------------------------------------
@@ -88,22 +69,26 @@ CREATE TABLE `Student` (
 -- Table structure for table `Teacher`
 --
 
-CREATE TABLE `Teacher` (
+CREATE TABLE IF NOT EXISTS `Teacher` (
   `TeacherID` varchar(15) NOT NULL,
   `Password` varchar(30) NOT NULL,
-  `OfficeLocation` varchar(8) NOT NULL,
-  `FirstName` varchar(40) NOT NULL,
-  `LastName` varchar(40) NOT NULL,
-  `OfficePhone` varchar(14) NOT NULL,
-  `CellPhone` varchar(10) NOT NULL,
-  `Email` varchar(160) NOT NULL,
-  PRIMARY KEY  (`TeacherID`)
+  `Name` varchar(256) NOT NULL,
+  `Email` varchar(256) NOT NULL,
+  PRIMARY KEY (`TeacherID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `Teacher`
+-- Table structure for table `User`
 --
 
+CREATE TABLE IF NOT EXISTS `User` (
+  `UserID` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `Type` enum('Teacher','Student') CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`UserID`,`Type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -121,3 +106,7 @@ ALTER TABLE `Course`
 ALTER TABLE `Course-Student`
   ADD CONSTRAINT `Course-Student_ibfk_2` FOREIGN KEY (`StudentID`) REFERENCES `Student` (`StudentID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Course-Student_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `Course` (`CourseID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -2,7 +2,7 @@
 	ob_start();	
 	session_start();
 	if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == 'N') {
-		header('Location: http://teacherstudent.jeffersonccit.com/signin.html');
+		header('Location: signin.php');
 		session_destroy();		
 		exit();	
 	}
@@ -17,74 +17,58 @@
 <html>
 <head>
 	<title>Student Home</title>
-	<link rel="stylesheet" type="text/css" href="FMSstyles.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 	<div id="textFields">
 	<img src="images/Top.png" />
 	
 			<div id="navTop">
-				<a href="index.html"> Sign Out </a>
+				<a href="index.html">Sign Out</a>
 			</div>
 	
-	<fieldset>
-	
-	<p>
-	<br />
-	<h2><center>White Board Student Home</center></h2><br />
-	Here you can view your account information as 
-	well as edit your account. By clicking on a class and then
-	"Notify Instructor", you can email your Instructor as well as see a
-	link where you can see the Instructor's information. 
-	<p/>
-	</fieldset>
-
-	
-	
 	<br />
 	<br />
 	<fieldset>
-			<form action="http://teacherstudent.jeffersonccit.com/studentNotifyInstructor.php" method ="post">	
-				<table border="2" cellpadding="5">
+			<form action="studentNotifyInstructor.php" method ="post">	
+				<table border="1" cellpadding="5">
 					<tr>
 						<th> Course </th>
 					</tr>
 			
 <?php 			
-	//select table from a databse
-	$query='SELECT CourseID FROM `Course-Student` WHERE StudentID = \''.$iD.'\';';
+	//select table from a database
+	$query='SELECT CourseID FROM `Course-Student` WHERE UserID = \''.$iD.'\';';
 	$result=mysql_query($query);
 
 	if (!$result) {
 		$message  = 'Invalid query: ' . mysql_error() . "\n";
 		$message .= 'Whole query: ' . $query;
 		die($message);
-	}
-	else {
+	} else {
 		echo "<tr><td>\n<select name='course_select' size = '5'>\n";
+		//lists all course IDs
 		while($row = mysql_fetch_array($result)) {
 			$dBCourseID = $row['CourseID'];
 			echo "<option value='".$dBCourseID."'>".$dBCourseID."</option>\n";
 		}
 		echo "</select>\n</td>\n";
-	}		
-		echo "<td><input type='submit' value='Notify Instructor'></td></tr>"
-?>		
-						
-					
-			</table>
-		</form>
-    <br />
-    <br />
+	}
+	echo "<td><input type='submit' value='Notify Instructor'></td></tr>";
+?>				
+		</table>
+		<br>
+	</form>
+	<form action="demoSend.php" method ="post">
+			<input type='submit' value='Send me a demo message!'>
+	</form>
 	
 	</fieldset>
-						<div id="nav-buttons-across">
-							<ul>
-									<li> <a href="StudentView_Edit.php"> View/Edit Account </a> </li>
-							</ul>
-							<br />
-							<br />
-						</div>
+		<div id="nav-buttons-across">
+			<ul>
+				<li> <a href="viewEdit.php"> View/Edit Account </a> </li>
+			</ul>
+		</div>
 	</div>
 </body>
 	

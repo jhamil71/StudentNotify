@@ -3,7 +3,7 @@
 	session_start();
 
 	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == "N") {
-		header("Location: http://teacherstudent.jeffersonccit.com/signin.html");
+		header("Location: signin.html");
 		session_destroy();
 		exit();
 	}
@@ -21,7 +21,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-	<title>Student View/Edit</title>
+	<title>View/Edit</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -41,12 +41,13 @@
 			<fieldset>		
 			<br />
 			<br />
+			<table>
 <?php			
 	//echo "<p>".$iD."</p>\n";	
 
 	//select table from a databse
 
-	$query='SELECT * FROM `Student` WHERE StudentID = \''.$iD.'\';';
+	$query='SELECT * FROM `User` WHERE UserID = \''.$iD.'\';';
 	//select table from a databse
 	$result=mysql_query($query);
 
@@ -58,56 +59,28 @@
 
 	else {
 		while($row = mysql_fetch_array($result)) {
-			$dBFirstName = $row['FirstName'];
-			$dBLastName = $row['LastName'];
-			$dBAddress = $row['Address'];
-			$dBhPhone = $row['HomePhone'];
-			$dBcPhone = $row['CellPhone'];
+			$dBName = $row['Name'];
+			$dBPhone = $row['CellPhone'];
 			$dBCarrier = $row['Carrier'];
 			$dBEmail = $row['Email'];
 			$dBContactPreference = $row['ContactPreference'];
-			$dBEdGoals = $row['EducationalGoals'];
-			$dBMajor = $row['Major'];
-			$dBEmpStatus = $row['EmploymentStatus'];
-			$dBHobbies = $row['HobbiesInterests'];
-?>
-<table>
-<?php			
-			echo "<tr><td>First Name:</td><td>$dBFirstName</td></tr>";
-			echo "<tr><td>Last Name:</td><td>$dBLastName</td></tr>";
-			echo "<tr><td>Home Address:</td><td>$dBAddress</td></tr>"; 
-			echo "<tr><td>Home Phone:</td><td>$dBhPhone</td></tr>";
-			echo "<tr><td>Cell Phone:</td><td>$dBcPhone</td></tr>";
-			echo "<tr><td>Carrier:</td><td>$dBCarrier</td></tr>";
+		
+			echo "<tr><td>Name:</td><td>$dBName</td></tr>";
 			echo "<tr><td>Email:</td><td>$dBEmail</td></tr>";
-			echo "<tr><td>Contact Preference:</td><td>$dBContactPreference</td></tr>";
-			echo "<tr><td>Major:</td><td>$dBMajor</td></tr>";
-			echo "<tr><td>Educational Goals: </td><td>$dBEdGoals</td></tr>";
-			echo "<tr><td>Employment Status:</td><td>$dBEmpStatus</td></tr>";
-			echo "<tr><td>Hobbies:</td><td>$dBHobbies</td></tr>";
-					
-?>
-</table><br /><br />
-<?php				
+			echo "<tr><td>Cell Phone:</td><td>$dBPhone</td></tr>";
+			echo "<tr><td>Carrier:</td><td>$dBCarrier</td></tr>";
+			echo "<tr><td>Contact Preference:</td><td>$dBContactPreference</td></tr>";			
 		}
 	}
 ?>
+</table><br /><br />
 <form name="frmRegister" method="post" action="studentInsert.php"  onsubmit="return validate(this);">
-		<table border="2">
-				<tr>					<th> Courses </th>
+		<table border="1">
+				<tr><th> Courses </th>
 				</tr>
 
 <?php
-
-	$hostname = "teacherstudent.db.10405859.hostedresource.com";
-	$username = "teacherstudent";
-	$dbname = "teacherstudent";
-	$password = "Teacher1!";
-
-	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
-	mysql_select_db($dbname);		
-
-	$query='SELECT CourseID FROM `Course-Student` WHERE StudentID = \''.$iD.'\';';
+	$query='SELECT CourseID FROM `Course-Student` WHERE UserID = \''.$iD.'\';';
 	$result=mysql_query($query);
 
 	if (!$result) {
@@ -127,15 +100,11 @@
 		</table>
 
 			</fieldset>
-			<br />
-			<br />
-			<br />
 			<div id="banners">Edit Account Information</div>			
 		<fieldset>
 			<h3><em><center>The above information is what is on file.<br />	
 			If any of this information is incorrect or needs to be updated,<br />	
 			 make the necessary changes below.</center></em></h3>
-					<hr />
 					<hr />
 
 					<div id="textFields">
@@ -149,25 +118,15 @@
 						</p>
 					</div>
 					<hr />
-					<p>						<label> <span id="maroon">First Name:&nbsp&nbsp&nbsp&nbsp&nbsp </span> <input type="text" name="firstName" /> </label>
-					</p>
-					<p>
-						<label> <span id="maroon">Last Name:&nbsp&nbsp&nbsp&nbsp&nbsp </span> <input type="text" name="lastName" /> </label>
-					</p>
-					<hr />
 					<p>
 					<label for="txtEmail"> <span id="maroon">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span></label>
 					<input type="email" name="txtEmail" id="txtEmail" size="12" />
 					</p>
-					<p>
-						<label> <span id="maroon">Home Address:&nbsp&nbsp&nbsp&nbsp&nbsp </span> <input type="text" name="homeAddress" /> </label>
-					</p>
+
 					<hr />
-					<center><p><span id="note-red">
-					<span id = "red">*</span>Home and Cell phone numbers do not have symbols e.g 5558761234. 555-876-1234 or (555)876-1234 are invalid entries.<span id = "red">*</span>
+					<center><p><span id="note-red">Please enter the cell phone number without symbols (like 5558761234). 555-876-1234 or (555)876-1234 are invalid entries.
 					</span></p></center>
-					<p>						<label><span id="maroon">Home Phone:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span><input type="text" name="hPhone" /> </label>
-						<label> <span id="maroon">Cell Phone: </span><input type="text" name="cPhone" /> </label>
+						<label> <span id="maroon">Cell Phone Number: </span><input type="text" name="cPhone" /> </label>
 					</p>
 					<p>
 						<label> <span id="maroon">
@@ -185,61 +144,18 @@
 					Contact Preference: </span> <select type="dropContact"
 					name="contactPreference" id="contactPreference">
 						<option value=""></option>
-						<option value="email"> Email </option>
-						<option value="text"> Text </option>
+						<option value="Email"> Email </option>
+						<option value="Text"> Text </option>
 						
 					</select> </label>
 					</p>
-					<hr />
-					<p>
-						<label> <span id="maroon">Major:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span>
-						<input type="text" name="major" /> </label>
-					</p>
-					<hr />
-					<p>
-						<label> <span id="maroon">Educational Goals:&nbsp&nbsp&nbsp </span>
-						<select type="dropEdGoals" name="educationalGoals" id="educationalGoals">
-						<option value=""></option>
-						<option value="2 year degree"> 2 year degree </option>
-						<option value="4 year degree"> 4 year degree </option>
-						<option value="Master's"> Master's </option>
-						<option value="Doctorate"> Doctorate </option>
-					</select> </label>
-					</p>
-					<p>
-						<label> <span id="maroon">Employment Status:&nbsp </span>
-						<select type="dropEmployment" name="employment" id="employment">
-						<option value=""></option>
-						<option value="Full-time"> Full-time </option>
-						<option value="Part-time"> Part-time </option>
-						<option value="Unemployed"> Unemployed </option>
-					</select> </label>
-					</p>
-					<hr />
-					<p>
-					<label> <span id="maroon">Hobbies/Interests:&nbsp </span>
-					<br />
-					<br />
-					<!-- Below is the actual text box. Above is the script for font options -->
-						<label for="hobbies"><textarea name="hobbies" id="hobbies" cols="40" rows="6"></textarea></label>
-					</p>
-					
-					
-					
 					<hr />
 			<table border="2" cellpadding="5">
 					<tr>
 						<th> Add Courses </th>
 					</tr>
 					
-<?php 
-	$hostname = "teacherstudent.db.10405859.hostedresource.com";
-	$username = "teacherstudent";
-	$dbname = "teacherstudent";
-	$password = "Teacher1!";
-
-	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
-	mysql_select_db($dbname);			
+<?php			
 	//echo "<p>".$iD."</p>\n";
 
 	//select table from a databse
@@ -264,15 +180,8 @@
 	<tr>
 	<th> Delete Courses </th>
 	</tr>
-<?php	
-	$hostname = "teacherstudent.db.10405859.hostedresource.com";
-	$username = "teacherstudent";
-	$dbname = "teacherstudent";	
-	$password = "Teacher1!";
-	$conn = mysql_connect($hostname, $username, $password) OR DIE ("Unable to connect to database! Please try again later.");
-	mysql_select_db($dbname);				
-	
-	$query='SELECT CourseID FROM `Course-Student` WHERE StudentID = \''.$iD.'\';';	
+<?php
+	$query='SELECT CourseID FROM `Course-Student` WHERE UserID = \''.$iD.'\';';	
 	$result=mysql_query($query);			
 		if (!$result) {
 			$message  = 'Invalid query: ' . mysql_error() . "\n";		
@@ -286,7 +195,7 @@
 			}
 			echo "</select>\n</td></div>\n";	
 		}
-?>				
+?>
 					</table>					
 		
 			<hr />

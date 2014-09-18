@@ -2,7 +2,7 @@
 	ob_start();
 	session_start();
 	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == "N") {
-		header("Location: http://teacherstudent.jeffersonccit.com/signin.html");
+		header("Location: signin.php");
 		session_destroy();
 		exit();
 	}
@@ -15,19 +15,10 @@
 	$oldPassword=$_POST['oldPassword'];
 	$newPassword=$_POST['newPassword'];
 	$newPassword2=$_POST['newPassword2'];
-	$firstName=$_POST['firstName'];
-	$lastName=$_POST['lastName'];
 	$cPhone=$_POST['cPhone'];
 	$email=$_POST['email'];
-	$oLocation=$_POST['oLocation'];
-	$oPhone=$_POST['oPhone'];
 	$addCourseNumber=$_POST['ADDCOURSE'];
 	$deleteCourseNumber=$_POST['deleteCourse'];
-	$mofficeHours = $_POST['mOfficeHour'];
-	$tofficeHours = $_POST['tOfficeHour'];
-	$wofficeHours = $_POST['wOfficeHour'];
-	$thofficeHours = $_POST['thOfficeHour'];
-	$fofficeHours = $_POST['fOfficeHour'];
 	
 	
 	if($newPassword != ""){
@@ -57,25 +48,6 @@
 		}
 	}
 	
-	if($firstName != ""){
-		$query='UPDATE `Teacher` SET FirstName=\''.$firstName.'\' WHERE TeacherID =\''.$iD.'\';';
-		$result=mysql_query($query);
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-	
-	if($lastName != ""){
-		$query='UPDATE `Teacher` SET LastName=\''.$lastName.'\' WHERE TeacherID =\''.$iD.'\';';
-		$result=mysql_query($query);
-		if (!$result) {			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-	
 	if($email != ""){
 		$query='UPDATE `Teacher` SET Email=\''.$email.'\' WHERE TeacherID =\''.$iD.'\';';
 		$result=mysql_query($query);
@@ -86,15 +58,6 @@
 		}
 	}
 	
-	if($oPhone != ""){
-		$query='UPDATE `Teacher` SET OfficePhone=\''.$oPhone.'\' WHERE TeacherID =\''.$iD.'\';';
-		$result=mysql_query($query);
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
 	
 	if($cPhone != ""){
 		$query='UPDATE `Teacher` SET CellPhone=\''.$cPhone.'\' WHERE TeacherID =\''.$iD.'\';';
@@ -105,62 +68,6 @@
 			die($message);
 		}
 	}
-	
-	if($oLocation != ""){
-		$query='UPDATE `Teacher` SET OfficeLocation=\''.$oLocation.'\' WHERE TeacherID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}	
-	
-	if($mofficeHours != ""){
-		$query='UPDATE `Teacher` SET MondayOfficeHours =\''.$mofficeHours.'\' WHERE TeacherID =\''.$iD.'\';';
-		$result=mysql_query($query);		
-		if (!$result) {
-			$message  = 'Invalid query: ' . mysql_error() . "\n";
-			$message .= 'Whole query: ' . $query;
-			die($message);
-		}
-	}
-	if($tofficeHours != ""){
-			$query='UPDATE `Teacher` SET TuesdayOfficeHours =\''.$tofficeHours.'\' WHERE TeacherID =\''.$iD.'\';';
-			$result=mysql_query($query);		
-			if (!$result) {
-				$message  = 'Invalid query: ' . mysql_error() . "\n";
-				$message .= 'Whole query: ' . $query;
-				die($message);
-			}
-		}
-	if($wofficeHours != ""){
-			$query='UPDATE `Teacher` SET WednesdayOfficeHours =\''.$wofficeHours.'\' WHERE TeacherID =\''.$iD.'\';';
-			$result=mysql_query($query);		
-			if (!$result) {
-				$message  = 'Invalid query: ' . mysql_error() . "\n";
-				$message .= 'Whole query: ' . $query;
-				die($message);
-			}
-		}
-	if($thofficeHours != ""){
-			$query='UPDATE `Teacher` SET ThursdayOfficeHours =\''.$thofficeHours.'\' WHERE TeacherID =\''.$iD.'\';';
-			$result=mysql_query($query);		
-			if (!$result) {
-				$message  = 'Invalid query: ' . mysql_error() . "\n";
-				$message .= 'Whole query: ' . $query;
-				die($message);
-			}
-		}
-	if($fofficeHours != ""){
-			$query='UPDATE `Teacher` SET FridayOfficeHours =\''.$fofficeHours.'\' WHERE TeacherID =\''.$iD.'\';';
-			$result=mysql_query($query);		
-			if (!$result) {
-				$message  = 'Invalid query: ' . mysql_error() . "\n";
-				$message .= 'Whole query: ' . $query;
-				die($message);
-			}
-		}	
 	
 	if($addCourseNumber != ""){		
 		$query="INSERT INTO `Course` (CourseID, TeacherID) VALUES ('$addCourseNumber', '$iD');";
@@ -181,6 +88,6 @@
 		}		
 	}
 	  	  
-	header("Location: http://teacherstudent.jeffersonccit.com/instructorView_Edit.php");
+	header("Location: viewEdit.php");
 	mysql_close($conn);ob_end_flush( );
 ?>

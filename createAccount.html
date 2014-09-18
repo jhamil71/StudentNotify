@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Register as Student</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<div id="textFields">
+	<img src="images/Top.png" />
+	
+	<div id="navTop">
+		<a href="index.html"> Back </a>
+	</div>
+		<fieldset>
+		<div id="note-red">
+                <p><span id = "red">*</span> denotes optional field</p></div>
+				Please fill in the following:
+				<form name="frmRegister" method="post" action="userCreate.php"  onsubmit="return validate(this);">
+				<p>
+				<label for="txtUsername"> <span id="maroon">User Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+				<input type="text" name="txtUserName" id="txtUserName" size="12" />
+				</p>
+				<p>
+				<label for="txtPassword"> <span id="maroon">Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+				<input type="password" name="txtPassword" id="txtPassword" size="12" />
+				</p>
+				<p>
+				<label for="txtPassword2"> <span id="maroon">Confirm Password:&nbsp </span> </label>
+				<input type="password" name="txtPassword2" id="txtPassword2" size="12" />
+				</p>
+				<hr />
+				<p>
+				<label for="txtName"> <span id="maroon">Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
+				<input type="text" name="txtName" id="txtName" size="12" />
+				<hr />
+				<label> <span id="maroon">Type of Account: </span><select name="userType">
+                                        <option value=""> </option>
+                                        <option value="Student"> Student </option>
+                                        <option value="Teacher"> Teacher </option>
+                                </select> </label>
+
+				<p>
+				<label for="txtEmail"> <span id="maroon">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span></label>
+				<input type="email" name="txtEmail" id="txtEmail" size="12" />
+				</p>
+				<center><p><span id="note-red">Cell phone format does not have symbols (like 5558761234) Formats like 555-876-1234 or (555)876-1234 are unsupported
+				</span></p></center>
+				<p>
+				<label> <span id="maroon">Cell Phone Number: </span><input type="text" name="cPhone" /> </label><span id="red">*</span>
+				</p>
+				<p>
+				<label> <span id="maroon">
+				Cell Phone Carrier: </span> <select type="dropCarrier"
+				name="carrier" id="carrier">
+					<option value="none"></option>
+					<option value="AT&T"> AT&T </option>
+					<option value="Verizon"> Verizon </option>
+					<option value="Sprint"> Sprint </option>
+					<option value="T-Mobile"> T-Mobile </option>
+				</select> </label>
+				</p>
+				<label> <span id="maroon">Contact Preference: </span><select name="contactPreference">
+					<option value=""> </option>
+					<option value="Email"> Email </option>
+					<option value="Text"> Text </option>
+				</select> </label>
+				<hr />
+				<input  class="red" type="submit" value="Apply">
+			</form>
+				</div>
+		</fieldset>
+
+	</div>
+<script type="text/JavaScript">
+function validate(form) {
+  var returnValue = true;
+
+  var username = form.txtUserName.value;
+  var password1 = form.txtPassword.value;
+  var password2 = form.txtPassword2.value;
+  var name = form.txtName.value;
+  var email = form.txtEmail.value;
+  
+  var errorMsg = "";
+		
+if(username == 0) {
+  returnValue = false;
+  //alert("Please enter a User Name.");
+  //frmRegister.txtUserName.focus();
+  errorMsg += "Please enter a User Name.\n"; 
+}
+
+if (password1.length < 6) {
+  returnValue = false;
+  //alert("Your password must be at least\n6 characters long.\nPlease try again.");
+  errorMsg += "Your password must be at least 6 characters long. Please try again.\n"
+  frmRegister.txtPassword.value = "";
+  frmRegister.txtPassword2.value = "";
+  //frmRegister.txtPassword.focus();
+}
+if (password1 != password2) {
+  returnValue = false;
+  //alert("Your password entries did not match.\nPlease try again.");
+  errorMsg += "Your password entries did not match. Please try again.\n";
+  frmRegister.txtPassword.value = "";
+  frmRegister.txtPassword2.value = "";
+  //frmRegister.txtPassword.focus();
+}
+if(name == 0) {
+  returnValue = false;
+  //alert("Please enter your Name.");
+  //frmRegister.txtName.focus();
+  errorMsg += "Please enter your Name.\n";
+}
+if(email == 0) {
+  returnValue = false;
+  //alert("Please enter a valid email.");
+  //frmRegister.txtEmail.focus();
+  errorMsg += "Please enter a valid email.\n";
+}
+
+  if (returnValue == false){
+    alert(errorMsg);
+  }else{
+    alert("You have successfully Registered!");
+  }
+  return returnValue;
+  
+  value.split(/\d/).length-1===10;
+}
+
+</script>
+</body>
+</html>

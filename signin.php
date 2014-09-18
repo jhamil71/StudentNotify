@@ -6,7 +6,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-	<title>White Board Log In</title>
+	<title>Student Notify Log In</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -17,7 +17,13 @@
 		</div>	
 			<fieldset>		
 					<h2>Log-in Information</h2>
-					<form name="frmRegister" method="post" action="wbLogin.php"><!--  onsubmit="return validate(this)">-->
+					<form name="frmRegister" method="post" action="login.php"><!--  onsubmit="return validate(this)">-->
+						<?php
+						if ($_GET['error']){?>
+						<p class="error">
+							Incorrect username or password.
+						</p>
+						<?php } ?>
 						<p>
 							<label for="txtUserName"> <span id="maroon">User Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span> </label>
 							<input type="username" name="txtUserName" id="txtUserName" size="12" />
