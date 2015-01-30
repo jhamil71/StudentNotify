@@ -1,1 +1,1 @@
-Did it work?
+Welcome to StudentNotify, a web system capable of sending notification to students of cancelled classes. If on Clarkson University  grounds, connect to jhamil71.duckdns.org (subject to change) to see it live.
